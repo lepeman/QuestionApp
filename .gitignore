@@ -21,3 +21,6 @@ Thumbs.db
 # Render o deploy (si usaras build)
 build/
 dist/
+
+index.js
+package.zip
