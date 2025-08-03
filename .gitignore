@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment variables (si llegas a usar .env)
+.env
+
+# SQLite database
+*.sqlite
+*.sqlite3
+*.db
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Render o deploy (si usaras build)
+build/
+dist/
