@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config();
 const express = require('express');
 const { Pool } = require('pg');
@@ -28,6 +27,7 @@ const createTable = async () => {
     console.error('Error al crear/verificar la tabla:', err);
   }
 };
+
 createTable();
 
 app.use(express.static('public'));
@@ -51,7 +51,7 @@ app.post('/preguntas', async (req, res) => {
 });
 
 // Ruta para revisar preguntas
-app.get('/preguntas', async (req, res) => {
+app.get('/api/preguntas', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM preguntas ORDER BY fecha DESC');
         res.json(result.rows);
@@ -59,6 +59,10 @@ app.get('/preguntas', async (req, res) => {
         console.error(err);
         res.status(500).send('Error al consultar la base de datos');
     }
+});
+
+app.get('/preguntas', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'preguntas.html'));
 });
 
 app.listen(port, () => {
