@@ -53,7 +53,7 @@ app.post('/preguntas', async (req, res) => {
 // Ruta para revisar preguntas
 app.get('/api/preguntas', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM preguntas ORDER BY fecha DESC');
+        const result = await pool.query('SELECT * FROM preguntas ORDER BY fecha ASC');
         res.json(result.rows);
     } catch (err) {
         console.error(err);
@@ -63,6 +63,17 @@ app.get('/api/preguntas', async (req, res) => {
 
 app.get('/preguntas', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'preguntas.html'));
+});
+
+app.delete('/api/preguntas/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.query('DELETE FROM preguntas WHERE id = $1', [id]);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al eliminar la pregunta' });
+  }
 });
 
 app.listen(port, () => {
