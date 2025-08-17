@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("contenedor-preguntas");
+  let i = 1;
 
   const cargarPreguntas = () => {
     fetch('/api/preguntas')
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const item = document.createElement('tr');
           //item.className = "list-group-item d-flex justify-content-between align-items-center";
           item.innerHTML = `
-            <th scope="row">${ p.id }</th>
+            <th scope="row">${ i++ }</th>
             <td>${p.pregunta}</td>
             <td>${ new Date(p.fecha).toLocaleString() }</td>
             <td><button class="btn btn-danger btn-sm">Eliminar</button></td>
